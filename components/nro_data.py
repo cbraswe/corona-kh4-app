@@ -4,8 +4,10 @@ import dash_bootstrap_components as dbc
 name = "Analyzing NRO data"
 layout = dbc.Container(
     children=[
-        html.P("NRO data followed by significant html breaks"),
+        html.Hr(),
+        html.H1("NRO Data Retrieval"),
         html.Br(),
+        html.P("Text here"),
         html.Br(),
         html.Br(),
         html.Br(),

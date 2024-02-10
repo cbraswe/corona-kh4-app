@@ -65,7 +65,10 @@ app.layout = dbc.Container(
                 },
             )
         ),
-        dbc.Row(dash.page_container, style={"margin-top": "75px", 'width': '100%', 'maxWidth': '100%'}),
+        dbc.Row(
+            dash.page_container,
+            style={"margin-top": "75px", "width": "100%", "maxWidth": "100%"},
+        ),
     ],
     style={"maxWidth": "100%", "height": "auto"},
 )

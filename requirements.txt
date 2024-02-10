@@ -1,3 +1,5 @@
 dash==2.15.0
 dash-bootstrap-components
 gunicorn
+pybtex
+pybtex-apa7-style
