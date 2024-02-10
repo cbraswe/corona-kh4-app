@@ -2,9 +2,9 @@ from dash import html
 from datetime import datetime
 import dash_bootstrap_components as dbc
 
-name = "Plane Crashes"
+name = "Holston Mountain Plane Crashes"
 # The below format is intended to help simplify the development and addition of content
-# fore ach accordion item, if it provided a date of the crash in iso-format it will be sorted by date
+# for ach accordion item, if it provided a date of the crash in iso-format it will be sorted by date
 army_l20_1960 = dbc.AccordionItem(
     html.Div(
         children=[
@@ -43,15 +43,25 @@ army_l20_1960 = dbc.AccordionItem(
             ),
         ]
     ),
-    title="Dec 17, 1960, An Army L-20 (SN 54-41671)",
+    title="Dec 17, 1960, Army L-20 (SN 54-41671)",
     id=datetime(1960, 12, 17).date().isoformat(),
 )
 
+# the FOIA report here mentions the abandonment at the scene
 army_l19_1961 = dbc.AccordionItem(
-    html.P("Hello 2"),
-    title="27 December 1959, Army L-20, SN 54-41671",
-    id=datetime(1959, 12, 17).date().isoformat(),
+    html.P(children = [
+        "On April 5, 1961 at approximately 19:09 EST, an Army L-19D crashed into an unspecified area of Holston Mountain approximately 3600' MSL. ",
+        html.A("The statement issued on page 19 of the FOIA request ", href="/data/1961_army_l19d_foia.pdf"),
+        "states, ",
+        html.Em(html.B("'this aircraft was considered demolished to the extent that it was abandoned at crash site.'")),
+        html.Br(),
+        html.Br(),
+        html.P(html.I(html.B("Note: Newspaper articles frequently transpose details between the Army LH-20 and LH-19 crashes. This is likely attributed to both flights being operated by the Army, the crashes occurring in rather short succession, and the similarity of the aircraft involved. Therefore, only the documents contained in the FOIA request and articles immediately preceding the crash were considered authoritative for this crash.")), style={'font-size': '.7rem', 'text-align': 'center'})
+    ]),
+    title="April 5, 1961, Army L-19D (SN 57-2793)",
+    id=datetime(1961, 4, 5).date().isoformat(),
 )
+# (Federal Aviation Administration (FAA), Navy, Air Force, Army, and the National Transportation Safety Bureau (NTSB)) are the investigative bodies
 
 layout = dbc.Container(
     children=[
@@ -59,7 +69,7 @@ layout = dbc.Container(
         html.H1("Holston Mountain Plane Crashes"),
         html.Br(),
         html.P(
-            "There are significant barriers in the identification of historic plane crashes. The primary barrier is an overwhelming reliance on the crash record being digitized and searchable. With Holston Mountain, there are crash records maintained by several different agencies: Federal Aviation Administration (FAA), Navy, Air Force, Army, and the National Transportation Safety Bureau (NTSB). To obtain full details for the crashes, it is often required to submit a Freedom of Information Act (FOIA) request to the investigative body. Next, the quality of the data varies heavily based on crash year and investigative body. Investigating a plane crash on a mountainside is labor and cost intensive, which may affect the ability and willingness of an agency to create the best possible record."
+            "There are significant barriers in the spatial identification of historic plane crashes, such as an overwhelming reliance on the crash record being digitized and searchable. For Holston Mountain crashes, the investigative records are maintained by several different agencies with varying levels of accessibility. To obtain full details for the crashes, it is often required to submit a Freedom of Information Act (FOIA) request, which introduces a significant delay in analysis. After the records are obtained, the quality of the data varies heavily based on crash year and location. This is likely attributable to the labor and costs associated with investigating remote mountainside locations with only foot or aerial access."
         ),
         html.P(
             "The following plane crashes were identified, primarily by digitized newspapers:"
