@@ -3,7 +3,6 @@ import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-
 class ChangeHandler(FileSystemEventHandler):
     """Restart the server if any files change."""
 
@@ -14,8 +13,7 @@ class ChangeHandler(FileSystemEventHandler):
         if server_process:
             server_process.terminate()
         # Start a new server process
-        server_process = subprocess.Popen(["python", "app.py"])
-
+        server_process = subprocess.Popen(["waitress-serve", "--listen=127.0.0.1:8050", "app:server"])
 
 if __name__ == "__main__":
     path = "."  # Path to watch for changes
@@ -25,7 +23,7 @@ if __name__ == "__main__":
     observer.start()
 
     # Initial server start
-    server_process = subprocess.Popen(["python", "app.py"])
+    server_process = subprocess.Popen(["waitress-serve", "--listen=127.0.0.1:8050", "app:server"])
 
     try:
         while True:

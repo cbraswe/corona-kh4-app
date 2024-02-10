@@ -39,6 +39,17 @@ app.layout = dbc.Container(
                         className="ml-auto",  # css flexbox margin left: auto to right align content
                     ),
                 ),
+                dbc.Col(
+                    html.A(
+                        html.Img(
+                            src="/assets/github_white.png",
+                            height="50px",
+                            style={"margin-right": "10px", "margin-left": "10px"},
+                        ),
+                        href="https://github.com/cbraswe/corona-kh4-app/",
+                    ),
+                    style={'flex': '0 1 auto', "border-left": "2px solid white", "margin-right": "2px",}
+                ),
             ]
         ),
         dash.page_container,
