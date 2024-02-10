@@ -4,6 +4,10 @@ from components import corona_dsm, keypoint_fm, introduction, nro_data, plane_cr
 
 register_page(__name__, path="/", order=0)
 
+# This page is strange due to my personal desire to have a long, scrolling content pane 
+# However, there are many sections that will exist in this document that would decrease code readability significantly if included here
+# therefore, these sections are included in the components directory
+# for a component to successfully work with the below code and be part of the sidebar, it must have a layout and
 component_order = [introduction, plane_crashes, nro_data, corona_dsm, keypoint_fm]
 
 sidebar = html.Div(
@@ -26,7 +30,7 @@ sidebar = html.Div(
     style={
         "position": "fixed",
         "width": "16rem",
-        "margin": "10rem 1rem",
+        "margin": "10rem -15rem",
         "padding": "1rem",
         "border": "2px solid #2D4A63",
         "border-radius": "20px",
@@ -38,7 +42,7 @@ layout = dbc.Container(
         sidebar,
         html.Div(
             children=[component.layout for component in component_order],
-            style={"margin-left": "18rem"},
+            style={"margin-left": "2rem"},
         ),
-    ]
+    ],
 )

@@ -59,15 +59,15 @@ app.layout = dbc.Container(
                 ],
                 style={
                     "position": "fixed",
-                    "width": "75%",
+                    "width": "100%",
                     "top": 0,
                     "z-index": "9999",
                 },
             )
         ),
-        dbc.Row(dash.page_container, style={"margin-top": "75px"}),
+        dbc.Row(dash.page_container, style={"margin-top": "75px", 'width': '100%', 'maxWidth': '100%'}),
     ],
-    style={"maxWidth": "75%", "height": "auto"},
+    style={"maxWidth": "100%", "height": "auto"},
 )
 
 server = app.server
