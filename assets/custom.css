@@ -1,0 +1,7 @@
+.offset:before { /*This prevents html Anchor tags from linking into the Navbar */
+	display: block; 
+ 	content: " "; 
+  	height: 70px;      /* Give height of your fixed element */
+        margin-top: -70px; /* Give negative margin of your fixed element */  	
+        visibility: hidden; 
+}

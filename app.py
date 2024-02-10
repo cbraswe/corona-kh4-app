@@ -9,50 +9,63 @@ app.title = "Corona"
 
 app.layout = dbc.Container(
     children=[
-        dbc.Navbar(
-            children=[
-                dbc.Col(
-                    html.A(
-                        html.Img(
-                            src="/assets/wlogo_nobg.png",
-                            height="50px",
-                            style={"margin-left": "10px"},
-                        ),
-                        href="/",
-                    )
-                ),
-                dbc.Col(
-                    dbc.Nav(
-                        children=[
-                            dbc.NavLink(
-                                page["name"],
-                                href=page["path"],
-                                style={
-                                    "border-left": "2px solid white",
-                                    "margin-right": "2px",
-                                },
-                            )
-                            for page in dash.page_registry.values()
-                            if page["path"] != "/not-found-404" and page["path"] != "/"
-                        ],
-                        style={"justify-content": "end"},
-                        className="ml-auto",  # css flexbox margin left: auto to right align content
+        dbc.Row(
+            dbc.Navbar(
+                children=[
+                    dbc.Col(
+                        html.A(
+                            html.Img(
+                                src="/assets/wlogo_nobg.png",
+                                height="50px",
+                                style={"margin-left": "10px"},
+                            ),
+                            href="/",
+                        )
                     ),
-                ),
-                dbc.Col(
-                    html.A(
-                        html.Img(
-                            src="/assets/github_white.png",
-                            height="50px",
-                            style={"margin-right": "10px", "margin-left": "10px"},
+                    dbc.Col(
+                        dbc.Nav(
+                            children=[
+                                dbc.NavLink(
+                                    page["name"],
+                                    href=page["path"],
+                                    style={
+                                        "border-left": "2px solid white",
+                                        "margin-right": "2px",
+                                    },
+                                )
+                                for page in dash.page_registry.values()
+                                if page["path"] != "/not-found-404"
+                                and page["path"] != "/"
+                            ],
+                            style={"justify-content": "end"},
+                            className="ml-auto",  # css flexbox margin left: auto to right align content
                         ),
-                        href="https://github.com/cbraswe/corona-kh4-app/",
                     ),
-                    style={'flex': '0 1 auto', "border-left": "2px solid white", "margin-right": "2px",}
-                ),
-            ]
+                    dbc.Col(
+                        html.A(
+                            html.Img(
+                                src="/assets/github_white.png",
+                                height="50px",
+                                style={"margin-right": "10px", "margin-left": "10px"},
+                            ),
+                            href="https://github.com/cbraswe/corona-kh4-app/",
+                        ),
+                        style={
+                            "flex": "0 1 auto",
+                            "border-left": "2px solid white",
+                            "margin-right": "2px",
+                        },
+                    ),
+                ],
+                style={
+                    "position": "fixed",
+                    "width": "75%",
+                    "top": 0,
+                    "z-index": "9999",
+                },
+            )
         ),
-        dash.page_container,
+        dbc.Row(dash.page_container, style={"margin-top": "75px"}),
     ],
     style={"maxWidth": "75%", "height": "auto"},
 )
