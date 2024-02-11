@@ -12,9 +12,9 @@ layout = dbc.Container(
         html.Hr(),
         html.H1("NRO Extraction, Analysis & Modeling"),
         html.Br(),
-        html.H2("NRO Data Retrieval"),
+        html.H2("Step 1: Retrieve the Data"),
         html.Br(),
-        html.P("The first step is to obtain the data... (MORE TEXT HERE)"),
+        html.P("Overall, NRO's FOIA page is well-maintained and sets a standard for providing accessible public access to government records. The archivists provide a title for each document, context on the document type (i.e., MEMO, TWX), number of pages, and dates. Despite this"),
         dbc.Button("", id="data-retrieval-collapse-button", n_clicks=0),
         dbc.Collapse(
             mkdown_retrieving_pdfs,

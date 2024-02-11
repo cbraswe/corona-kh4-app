@@ -1,3 +1,5 @@
+
+import logging
 from nbconvert.exporters.markdown import MarkdownExporter
 
 
@@ -26,3 +28,13 @@ def notebook_to_md(filename):
     mk.exclude_output = True
     mk.exclude_markdown = True
     return mk.from_filename(filename=filename)[0]
+
+def create_fh_logger(file):
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s')
+    file_handler = logging.FileHandler(file)
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+    return logger
