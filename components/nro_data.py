@@ -1,6 +1,7 @@
-from dash import html
+from dash import callback, html, Input, Output, State
+from dash.dcc import Markdown
 import dash_bootstrap_components as dbc
-from dash_core_components import Markdown
+from utils import reverse_code_text
 name = "Analyzing NRO data"
 
 mkdown_retrieving_pdfs = Markdown(
@@ -64,13 +65,25 @@ layout = dbc.Container(
         html.Hr(),
         html.H1("NRO Extraction, Analysis & Modeling"),
         html.Br(),
-        html.H2('NRO Data Retrieval & Processing'),
+        html.H2('NRO Data Retrieval'),
         html.Br(),
-        html.P('The first step is to obtain the data; however, there is not a download all button on NROs website. This is easy to overcome'),
-        html.Div(mkdown_retrieving_pdfs),
+        html.P('The first step is to obtain the data... (MORE TEXT HERE)'),
+        dbc.Button('', id='data-retrieval-collapse-button', n_clicks=0),
+        dbc.Collapse(mkdown_retrieving_pdfs, id='data-retrieval-collapse-code'),
         html.Br(),
         html.P(""),
     ],
     id="nro-data",
     class_name="offset",
 )
+
+@callback(
+    [Output("data-retrieval-collapse-code", "is_open"),
+    Output('data-retrieval-collapse-button', 'children')],
+    [Input("data-retrieval-collapse-button", "n_clicks")],
+    [State("data-retrieval-collapse-code", "is_open"), State('data-retrieval-collapse-button', 'children')],
+)
+def toggle_pdf_retrieval_collapse(n_clicks, is_open, button_text):
+    if n_clicks:
+        return not is_open, reverse_code_text(button_text)
+    return is_open, reverse_code_text(button_text)
