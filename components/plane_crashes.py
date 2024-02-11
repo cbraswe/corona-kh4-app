@@ -113,22 +113,13 @@ cessna_182 = dbc.AccordionItem(
 navy_snb = dbc.AccordionItem(
     html.P(
         children=[
-            "On July 3, 1961, a civilian aircraft crashed around 300 yards from the WCYB TV transmitter. ",
-            html.A(
-                "News footage from investigative personnel shows the immediate area.",
-                href="https://curio.lib.virginia.edu/view/uva-lib:2249472",
-            ),
-            " Separately, the ",
-            html.A("Johnson City Press-Chronicle reported ", href="#jcp_cessna_182"),
-            "the crash debris was spread over a half mile radius.",
+            "On February 2, 1958, a Navy SNB crashed into Holston Mountain. A FOIA request needs to be submitted for additional details.",
         ]
     ),
-    title="Jul 3, 1961, Navy Operated Cessna 182",
-    id=datetime(1961, 7, 3).date().isoformat(),
+    title="Feb 2, 1958, Navy SNB",
+    id=datetime(1958, 2, 2).date().isoformat(),
 )
 
-# (Federal Aviation Administration (FAA), Navy, Air Force, Army, and the National Transportation Safety Bureau (NTSB)) are the investigative bodies
-# need documented still: navy snb, rf4
 layout = dbc.Container(
     children=[
         html.Hr(),
@@ -144,7 +135,7 @@ layout = dbc.Container(
         ),
         dbc.Accordion(
             sorted(
-                [army_l20_1960, army_l19_1961, dc3_1959, cessna_182], key=lambda x: x.id
+                [army_l20_1960, army_l19_1961, dc3_1959, cessna_182, navy_snb], key=lambda x: x.id
             ),
             start_collapsed=True,
         ),

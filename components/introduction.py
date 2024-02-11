@@ -26,7 +26,7 @@ layout = dbc.Container(
         html.Br(),
         html.P(
             children=[
-                "Likely due to technical limitations and procedures at the time, the crash locations are partially unknown and poorly recorded. However, hikers and geocachers have identified wreckage from most plane crashes. However, are these points of impact, parts that far exceeded the original crash bounds, or smaller parts that experienced a severe locational drift after 50 years? The amount of clean-up and removal varied wildly between crashes, so it is unclear how to characterize recently identified wreckage. For context, one report explicitly mentioned considering the aircraft a total loss and abandoning it to nature. A different report implied the area was fervently searched and parts removed."
+                "Likely due to technical limitations and procedures at the time, the crash locations are partially unknown and poorly recorded. The amount of clean-up and removal varied wildly between crashes, so it is unclear how to characterize recently identified wreckage. For context, one report explicitly mentioned considering the aircraft a total loss and abandoning it to nature. A different report implied the area was fervently searched and parts removed."
             ]
         ),
         html.Br(),

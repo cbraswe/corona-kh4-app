@@ -24,7 +24,7 @@ layout = dbc.Container(
         ),
         html.H2("Possible DC-3 Crash Location"),
         html.P(
-            'Attachment A in the DC-3 crash report provided an accurate map. Two image pixels were mapped to a geographic location, and a translation matrix was created for the remainder of the image. Due to the lack of landmarks in the original image, the accuracy of the translation is unclear. The LFR and LMM locations were possibly identified; however, one location has to be incorrect for the other to exist. Given the age of the map and construction around the airport, it seems probable that the current locations of the LMM/LOM do not reflect historics. Accuracy could improve with the identification of the Emmett "H", which is also known as Emmett MHW, EME MHW, Emmett Int. It is listed as 14.5 miles from Tri-Cities Airport.'
+            'Attachment A in the DC-3 crash report provided an accurate map. Two image pixels were mapped to a geographic location, and a translation matrix was created for the remainder of the image. Due to the lack of landmarks in the original image, the accuracy of the translation is disputable. A topographic map with report context will likely be able to complete this geolocation. Separately, since there is an image distortion present within the scale, it would be possible to create a second translation to minimize the impacts of the distortion if needed. '
         ),
         html.Div(
             dl.Map(
@@ -58,6 +58,6 @@ layout = dbc.Container(
             )
         ),
     ],
-    id="nro-data",
+    id="geolocated-crashes",
     class_name="offset",
 )
