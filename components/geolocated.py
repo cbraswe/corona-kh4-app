@@ -5,16 +5,22 @@ import os
 from shapely.geometry import Polygon
 
 name = "Geolocated Plane Crashes"
-img_coords = [
-    [36.26072363015, -82.58834378005001],
-    [36.79178077685, -82.58834378005001],
-    [36.79178077685, -81.93113484415001],
-    [36.26072363015, -81.93113484415001],
-    [36.26072363015, -82.58834378005001],
+#DC3 Notes: 18.75 nm from tri-cities airport
+# aircraft was on a course of 235 degrees
+# struck at 3140 ft near crest of mountain 
+# lmm should be 5 nm east of the end of runway 27
+# lom must be 3.7 nm east of the runway 27
+# emmett beacon must be 12.3 nm east of runway 
+# 
+img_coords = [[36.249417251549914, -82.59741041584994],
+ [36.80322278415002, -82.59741041584994],
+ [36.80322278415002, -81.92188844794993],
+ [36.249417251549914, -81.92188844794993],
+ [36.249417251549914, -82.59741041584994]
 ]
-
-center = Polygon(img_coords).centroid.coords
-vor = [36.4370556, -82.1296000]
+airport = [36.47853873, -82.3953803]
+center = Polygon(img_coords).centroid.coords #°W °N 
+vor = [36.4370628, -82.1295676]
 layout = dbc.Container(
     children=[
         html.Hr(),
@@ -24,21 +30,42 @@ layout = dbc.Container(
         ),
         html.H2("Possible DC-3 Crash Location"),
         html.P(
-            'Attachment A in the DC-3 crash report provided an accurate map. Two image pixels were mapped to a geographic location, and a translation matrix was created for the remainder of the image. Due to the lack of landmarks in the original image, the accuracy of the translation is disputable. I suspect it requires an additional .5 - 1 degree rotation for accuracy. The remainder of the crash report will need to be reviewed to validate this location. Separately, the distortion around the edges do not appear to persist to the center of the image.'
+            'Attachment A in the DC-3 crash report provided an accurate map. Two image pixels were mapped to a geographic location, and a translation matrix was created for the remainder of the image. The result was rotated an additional 2 degrees to correctly orient the North arrow. The below map represents the perceived best possible solution for the map, with point markers included as reference to understand potential skew. A simplified, polygonized elevation is included for Sullivan County elevations between 3120-3160ft. The elevation was originally provided with 2ft post spacing with very high accuracy, greatly reducing responsiveness.'
         ),
         html.Div(
             dl.Map(
-                [
-                    dl.TileLayer(
-                        url="https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key="
-                        + f"{os.environ.get('MAP_TILER_KEY')}",
-                        attribution="MapTiler",
-                    ),
-                    dl.Marker(
-                        position=vor,
-                        children=[dl.Tooltip(content="<b>Holston VOR<b/>")],
-                        id="vor",
-                    ),
+                [   
+                    dl.LayersControl([
+                        dl.BaseLayer(
+                            dl.TileLayer(
+                                url="https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key="
+                                + f"{os.environ.get('MAP_TILER_KEY')}",
+                                attribution="MapTiler"
+                            ),checked=True,
+                            name='Topographic Basemap'),
+                        dl.Overlay(
+                            dl.LayerGroup(
+                                dl.LayerGroup(
+                                    [dl.Marker(
+                                        position=vor,
+                                        children=[dl.Popup(content="<b>Holston VOR<b/>")],
+                                        id="vor"
+                                    ),
+                                    dl.Marker(
+                                        position=airport,
+                                        children=[dl.Popup(content="<b>Tri-Cities Airport End of Runway 27<b/>")],
+                                        id='airport'
+                                    )],
+                                )
+                                ),checked=True, name='Mentioned Locations'
+                            ),
+                        dl.Overlay(
+                            dl.GeoJSON(
+                                url='/assets/3120_3160_elvation.geojson'
+                            ),checked=True,
+                            name='Polygonized Elevation (3120-3160ft)'
+                        )
+                    ]),
                     dl.ImageOverlay(
                         opacity=0.5, url="/assets/se304_attacha.png", bounds=img_coords
                     ),
