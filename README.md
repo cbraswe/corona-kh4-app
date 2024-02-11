@@ -1,6 +1,9 @@
 # corona-kh4-app
 An application to fuel a project focused on analyzing data from Corona KH-4.
 
+## Archivist, Local Historian, Hiker, or End User with Additional Crash Information?
+Please open an issue! 
+
 ## Deployment
 This is deployed using Render, which has very simplistic requirements. Unfortunately, one of the requirements is a requirements.txt file with the Dash version specified and gunicorn included. Versions for requirements outside of Dash are not possible to set. 
 
