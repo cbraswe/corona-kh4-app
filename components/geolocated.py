@@ -24,13 +24,13 @@ layout = dbc.Container(
         ),
         html.H2("Possible DC-3 Crash Location"),
         html.P(
-            'Attachment A in the DC-3 crash report provided an accurate map. Two image pixels were mapped to a geographic location, and a translation matrix was created for the remainder of the image. Due to the lack of landmarks in the original image, the accuracy of the translation is disputable. A topographic map with report context will likely be able to complete this geolocation. Separately, since there is an image distortion present within the scale, it would be possible to create a second translation to minimize the impacts of the distortion if needed. '
+            'Attachment A in the DC-3 crash report provided an accurate map. Two image pixels were mapped to a geographic location, and a translation matrix was created for the remainder of the image. Due to the lack of landmarks in the original image, the accuracy of the translation is disputable. I suspect it requires an additional .5 - 1 degree rotation for accuracy. The remainder of the crash report will need to be reviewed to validate this location. Separately, the distortion around the edges do not appear to persist to the center of the image.'
         ),
         html.Div(
             dl.Map(
                 [
                     dl.TileLayer(
-                        url="https://api.maptiler.com/maps/openstreetmap/256/{z}/{x}/{y}.jpg?key="
+                        url="https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key="
                         + f"{os.environ.get('MAP_TILER_KEY')}",
                         attribution="MapTiler",
                     ),
