@@ -7,4 +7,5 @@ This is deployed using Render, which has very simplistic requirements. Unfortuna
 ## Working on Windows
 Instead of `gunicorn`, it is possible to use `waitress`. The command to invoke `waitress` is `waitress-serve --listen=127.0.0.1:8050 app:server`. Alternatively `dev_app.py` may be invoked using `python dev_app.py`. This uses `watchdog` to monitor for changes within files. If it detects a change, it will automatically restart using `waitress`. Alternatively, gunicorn can be used with WSL.
 
-## Removing Requirement to 
+## Removing Notebook Output from Uploads
+```git config filter.strip-notebook-output.clean 'jupyter nbconvert --ClearOutputPreprocessor.enabled=True --to=notebook --stdin --stdout --log-level=ERROR' ```
