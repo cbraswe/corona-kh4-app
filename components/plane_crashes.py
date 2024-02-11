@@ -120,6 +120,42 @@ navy_snb = dbc.AccordionItem(
     id=datetime(1958, 2, 2).date().isoformat(),
 )
 
+rf4_crash = dbc.AccordionItem(
+    html.P(
+        children=[
+            'On October 1, 1971 at approximately 16:02 EDT, An Airforce RF-4C crashed into Holston Mountain approximately 1.5miles East of Holston VOR. A FOIA request was submitted, but the documents were provided via hardcopy and have not been scanned. The RF-4 site is a popular geocaching site, and the coordinates for this crash are well known.'
+        ]
+    ),
+    title = 'Oct 1, 1971 RF-4C (SN 66-0460)',
+    id = datetime(1976,10,1).date().isoformat()
+)
+
+piper_pa34 = dbc.AccordionItem(
+    html.P(
+        children=[
+            "On April 7, 1994 at 08:10 EDT, a Piper PA-31350 crashed 200ft below the ",
+             html.A("crest of Holston Mountain at about 4,000ft MSL.", href="https://app.ntsb.gov/pdfgenerator/ReportGeneratorFile.ashx?EventID=20001206X01022&AKey=1&RType=HTML&IType=FA"),
+            "The location was approximately 5mi NE of the Elizaebthon Airport, but a specific location was not listed."
+        ]
+    ),
+    title = 'Apr 7, 1994 Piper PA-31350 (SN 31-7852127)',
+    id = datetime(1994,4,8).date().isoformat()
+)
+
+cessna_172k_2014 = dbc.AccordionItem(
+    html.P(
+        children=[
+            "On March 18, 2014 at 19:15 EST, a Cessna 172K crashed ",
+             html.A("at approximately 36.433334, -82.160003.", href="https://data.ntsb.gov/Docket?ProjectID=88934"),
+            "The plane came to rest at approximately 3000ft MSL."
+        ]
+    ),
+    title = 'Mar 18, 2014 Cessna 172K (SN 17257379)',
+    id = datetime(2014,3,18).date().isoformat()
+)
+
+
+
 layout = dbc.Container(
     children=[
         html.Hr(),
@@ -135,13 +171,13 @@ layout = dbc.Container(
         ),
         dbc.Accordion(
             sorted(
-                [army_l20_1960, army_l19_1961, dc3_1959, cessna_182, navy_snb],
+                [army_l20_1960, army_l19_1961, dc3_1959, cessna_182, navy_snb, rf4_crash, piper_pa34, cessna_172k_2014],
                 key=lambda x: x.id,
             ),
             start_collapsed=True,
         ),
         html.P(
-            "Additional crashes include (1) National Guard Bell OH-58 helicopter in 1998, (2) civilian Operated Beech Bonaza in 2007, (3) civilian operated Cessna 185 in 1981, (4) civilian operated Cessna 172K in 2014, (5) civilian opearted Piper Navho PA31 in 1994 and (6) Air Force RF-4 in 1976. These crashes may be included in the study at a later time; however, the dates for the crashes currently exceed the predicted bounds for the study. The RF-4 is a very likely candidate for inclusion at a later date, due to the known crash site and age of the site."
+            "Additional crashes include (1) National Guard Bell OH-58 helicopter in 1998, (2) civilian Operated Beech Bonaza in 2007, (3) civilian operated Cessna 185 in 1981, (4) A probable Cessna 182 in 1976, (5) A Cessna U206G in 2009. These crashes may be included in the study at a later time; however, the dates for the crashes currently exceed the predicted bounds for the study."
         ),
     ],
     id="plane-crashes",

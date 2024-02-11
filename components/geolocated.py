@@ -29,7 +29,7 @@ layout = dbc.Container(
         html.P(
             "Unless otherwise indicated, geolocations are intended as a starting point for further analysis and not considered authoritative."
         ),
-        html.H2("Possible DC-3 Crash Location"),
+        html.H2("Possible DC-3 Crash Location, Annotated by 'X'"),
         html.P(
             "In the DC-3 crash report, Attachment-A included a map with a scale and North arrow, which are typical features indicative of an accurate map. To translate the image into a geogaphical location, image pixels for Holston VOR and Tri-Cities Airport were mapped to their geographic location, and a translation matrix was created for the remainder of the image. The result was rotated an additional 2 degrees to correctly orient the North arrow. The below map represents the perceived best possible solution for the map, with point markers included as reference to understand potential skew. A simplified, polygonized elevation is included for Sullivan County elevations between 3120-3160ft, since the point of impact was reportedly at 3,140ft. The elevation was originally provided with 2ft post spacing with very high accuracy, which reduced responsiveness."
         ),
@@ -42,7 +42,7 @@ layout = dbc.Container(
                                 dl.TileLayer(
                                     url="https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key="
                                     + f"{os.environ.get('MAP_TILER_KEY')}",
-                                    attribution="MapTiler",
+                                    attribution="&copy; <a href='https://www.maptiler.com/copyright/'>MapTiler</a>",
                                 ),
                                 checked=True,
                                 name="Topographic Basemap",
@@ -51,7 +51,7 @@ layout = dbc.Container(
                                 dl.TileLayer(
                                     url="https://api.maptiler.com/maps/openstreetmap/256/{z}/{x}/{y}.jpg?key="
                                     + f"{os.environ.get('MAP_TILER_KEY')}",
-                                    attribution="MapTiler",
+                                    attribution="https://www.maptiler.com/copyright/'>MapTiler</a>",
                                 ),
                                 checked=False,
                                 name="Open Street Maps",
