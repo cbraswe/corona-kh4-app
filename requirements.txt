@@ -2,6 +2,8 @@ dash==2.15.0
 dash-bootstrap-components
 dash_leaflet
 gunicorn
+jupyter
+nbconvert
 pybtex
 pybtex-apa7-style
 shapely
