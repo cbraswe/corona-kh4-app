@@ -135,7 +135,8 @@ layout = dbc.Container(
         ),
         dbc.Accordion(
             sorted(
-                [army_l20_1960, army_l19_1961, dc3_1959, cessna_182, navy_snb], key=lambda x: x.id
+                [army_l20_1960, army_l19_1961, dc3_1959, cessna_182, navy_snb],
+                key=lambda x: x.id,
             ),
             start_collapsed=True,
         ),

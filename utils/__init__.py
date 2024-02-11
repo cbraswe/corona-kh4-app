@@ -1,12 +1,27 @@
 from nbconvert.exporters.markdown import MarkdownExporter
 
+
 def reverse_code_text(text):
-    if text == '' or text == 'Hide Notebook':
-        return 'Show Notebook'
+    """This reverses the text of buttons intended to show/hide notebooks. If show notebook is the text, then it returns hide notebook.
+
+    :param text: The current text associated with the button
+    :type text: str
+    :return: The new text associated with the button
+    :rtype: str
+    """
+    if text == "" or text == "Hide Notebook":
+        return "Show Notebook"
     else:
-        return 'Hide Notebook'
-    
+        return "Hide Notebook"
+
 def notebook_to_md(filename):
+    """This uses nbconvert, which requires Jupyter (tough dependency), to convert an `ipynb` file to a `markdown` file. This can be used in sections to include embed code directly.
+
+    :param filename: The filename of the notebook to convert
+    :type filename: str
+    :return: Markdown that can be directly provided to dash.dcc.Markdown
+    :rtype: str
+    """
     mk = MarkdownExporter()
     mk.exclude_output = True
     mk.exclude_markdown = True
