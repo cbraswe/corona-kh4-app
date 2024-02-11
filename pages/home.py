@@ -7,6 +7,7 @@ from components import (
     nro_data,
     plane_crashes,
     references,
+    geolocated,
 )
 
 register_page(__name__, path="/", order=0)
@@ -18,6 +19,7 @@ register_page(__name__, path="/", order=0)
 component_order = [
     introduction,
     plane_crashes,
+    geolocated,
     nro_data,
     corona_dsm,
     keypoint_fm,
