@@ -2,7 +2,7 @@ from dash import html
 import dash_leaflet as dl
 import dash_bootstrap_components as dbc
 import os
-from shapely.geometry import Polygon
+import rasterio
 
 name = "Geolocated Plane Crashes"
 # DC3 Notes: 18.75 nm from tri-cities airport
@@ -11,16 +11,16 @@ name = "Geolocated Plane Crashes"
 # lmm should be 5 nm east of the end of runway 27
 # lom must be 3.7 nm east of the runway 27
 # emmett beacon must be 12.3 nm east of runway
-#
-img_coords = [
-    [36.249417251549914, -82.59741041584994],
-    [36.80322278415002, -82.59741041584994],
-    [36.80322278415002, -81.92188844794993],
-    [36.249417251549914, -81.92188844794993],
-    [36.249417251549914, -82.59741041584994],
-]
+dc3 = rasterio.open('assets/se304_attacha.png').bounds
+dc3_bounds = [
+    [dc3.bottom, dc3.left],
+    [dc3.top, dc3.left],
+    [dc3.top, dc3.right],
+    [dc3.bottom, dc3.right],
+    [dc3.bottom, dc3.left],
+] # this is inverted for use with Dash-leaflet
+dc3_center = [(dc3.top + dc3.bottom)/2, (dc3.left + dc3.right)/2]
 airport = [36.47853873, -82.3953803]
-center = Polygon(img_coords).centroid.coords
 vor = [36.4370628, -82.1295676]
 layout = dbc.Container(
     children=[
@@ -99,7 +99,7 @@ layout = dbc.Container(
                         ]
                     ),
                     dl.ImageOverlay(
-                        opacity=0.5, url="/assets/se304_attacha.png", bounds=img_coords
+                        opacity=0.5, url="/assets/se304_attacha.png", bounds=dc3_bounds
                     ),
                     dl.MeasureControl(
                         position="topleft",
@@ -111,7 +111,7 @@ layout = dbc.Container(
                         completedColor="#972158",
                     ),
                 ],
-                center=[Polygon(img_coords).centroid.x, Polygon(img_coords).centroid.y],
+                center=dc3_center,
                 zoom=10,
                 style={"height": "500px", "width": "100%"},
             )

@@ -6,4 +6,5 @@ jupyter
 nbconvert
 pybtex
 pybtex-apa7-style
+rasterio
 shapely
