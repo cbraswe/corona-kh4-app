@@ -19,7 +19,7 @@ img_coords = [[36.249417251549914, -82.59741041584994],
  [36.249417251549914, -82.59741041584994]
 ]
 airport = [36.47853873, -82.3953803]
-center = Polygon(img_coords).centroid.coords #°W °N 
+center = Polygon(img_coords).centroid.coords 
 vor = [36.4370628, -82.1295676]
 layout = dbc.Container(
     children=[
@@ -30,7 +30,7 @@ layout = dbc.Container(
         ),
         html.H2("Possible DC-3 Crash Location"),
         html.P(
-            'Attachment A in the DC-3 crash report provided an accurate map. Two image pixels were mapped to a geographic location, and a translation matrix was created for the remainder of the image. The result was rotated an additional 2 degrees to correctly orient the North arrow. The below map represents the perceived best possible solution for the map, with point markers included as reference to understand potential skew. A simplified, polygonized elevation is included for Sullivan County elevations between 3120-3160ft. The elevation was originally provided with 2ft post spacing with very high accuracy, greatly reducing responsiveness.'
+            'In the DC-3 crash report, Attachment-A included a map with a scale and North arrow, which are typical features indicative of an accurate map. To translate the image into a geogaphical location, image pixels for Holston VOR and Tri-Cities Airport were mapped to their geographic location, and a translation matrix was created for the remainder of the image. The result was rotated an additional 2 degrees to correctly orient the North arrow. The below map represents the perceived best possible solution for the map, with point markers included as reference to understand potential skew. A simplified, polygonized elevation is included for Sullivan County elevations between 3120-3160ft, since the point of impact was reportedly at 3,140ft. The elevation was originally provided with 2ft post spacing with very high accuracy, which reduced responsiveness.'
         ),
         html.Div(
             dl.Map(
@@ -41,8 +41,21 @@ layout = dbc.Container(
                                 url="https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key="
                                 + f"{os.environ.get('MAP_TILER_KEY')}",
                                 attribution="MapTiler"
-                            ),checked=True,
+                            ), checked=True,
                             name='Topographic Basemap'),
+                        dl.BaseLayer(
+                            dl.TileLayer(
+                                url="https://api.maptiler.com/maps/openstreetmap/256/{z}/{x}/{y}.jpg?key="
+                                + f"{os.environ.get('MAP_TILER_KEY')}",
+                                attribution="MapTiler"
+                            ), checked=False,
+                            name='Open Street Maps'),
+                        dl.Overlay(
+                            dl.TileLayer(
+                            url='https://api.maptiler.com/tiles/contours/{z}/{x}/{y}.pbf?key=' + f"{os.environ.get('MAP_TILER_KEY')}",
+                            ),
+                            name='Contour Vectors (Experimental)'
+                        ),
                         dl.Overlay(
                             dl.LayerGroup(
                                 dl.LayerGroup(
@@ -64,7 +77,7 @@ layout = dbc.Container(
                                 url='/assets/3120_3160_elvation.geojson'
                             ),checked=True,
                             name='Polygonized Elevation (3120-3160ft)'
-                        )
+                        ),
                     ]),
                     dl.ImageOverlay(
                         opacity=0.5, url="/assets/se304_attacha.png", bounds=img_coords
