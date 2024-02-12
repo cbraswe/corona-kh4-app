@@ -1,8 +1,10 @@
 from dash import html
 import dash_leaflet as dl
 import dash_bootstrap_components as dbc
+from dash import callback, html, Input, Output, State
 import os
 import rasterio
+from utils import notebook_to_md, update_code_button
 
 name = "Geolocated Plane Crashes"
 # DC3 Notes: 18.75 nm from tri-cities airport
@@ -22,6 +24,7 @@ dc3_bounds = [
 dc3_center = [(dc3.top + dc3.bottom)/2, (dc3.left + dc3.right)/2]
 airport = [36.47853873, -82.3953803]
 vor = [36.4370628, -82.1295676]
+tricites_lfr = [36.494722, -82.334722] #https://flyingthebeams.com/map
 layout = dbc.Container(
     children=[
         html.Hr(),
@@ -30,8 +33,19 @@ layout = dbc.Container(
             "Unless otherwise indicated, geolocations are intended as a starting point for further analysis and not considered authoritative."
         ),
         html.H2("Possible DC-3 Crash Location, Annotated by 'X'"),
-        html.P(
-            "In the DC-3 crash report, Attachment-A included a map with a scale and North arrow, which are typical features indicative of an accurate map. To translate the image into a geogaphical location, image pixels for Holston VOR and Tri-Cities Airport were mapped to their geographic location, and a translation matrix was created for the remainder of the image. The result was rotated an additional 2 degrees to correctly orient the North arrow. The below map represents the perceived best possible solution for the map, with point markers included as reference to understand potential skew. A simplified, polygonized elevation is included for Sullivan County elevations between 3120-3160ft, since the point of impact was reportedly at 3,140ft. The elevation was originally provided with 2ft post spacing with very high accuracy, which reduced responsiveness."
+        html.P(children=[
+            "In the DC-3 crash report, Attachment-A included a map with a scale and North arrow, which are typically indicative of an accurate map. To translate the image into a greogaphical location, image pixels for Holston VOR and Tri-Cities Airport were mapped to their geographic location to create a translation matrix. The approximate location of the Tri-Cities Low Frequency Range is ",
+        html.A("known, but the precision of coordinates is unclear.", href='https://flyingthebeams.com/map'),
+        " Therefore, this set of coordinates was excluded."]),
+        dbc.Button("", id="data-geolocation-collapse-button", n_clicks=0),
+        dbc.Collapse(
+            notebook_to_md("notebooks/geolocation/1_geolocating_dc3.ipynb"),
+            id="data-geolocation-collapse-code",
+            className='notebook-embed',
+        ),
+        html.Br(),
+        html.Br(),
+        html.P("The below map represents the perceived best possible solution for the map, with point markers included as reference to understand potential skew. A simplified, polygonized elevation is included for Sullivan County elevations between 3120-3160ft, since the point of impact was reportedly at 3,140ft. The elevation was originally provided with 2ft post spacing with very high accuracy, which reduced responsiveness."
         ),
         html.Div(
             dl.Map(
@@ -85,6 +99,14 @@ layout = dbc.Container(
                                                 ],
                                                 id="airport",
                                             ),
+                                            dl.Marker(
+                                                position=tricites_lfr,
+                                                children=[
+                                                  dl.Popup(
+                                                        content="<b>Approximate Location of Tri-Cities LFR, fidelity UNK<b/>"
+                                                    )  
+                                                ]
+                                            )
                                         ],
                                     )
                                 ),
@@ -120,3 +142,18 @@ layout = dbc.Container(
     id="geolocated-crashes",
     class_name="offset",
 )
+
+#! TODO: Find a better mechanism to handle these shared code cases. I think matching will work
+@callback(
+    [
+        Output("data-geolocation-collapse-code", "is_open"),
+        Output("data-geolocation-collapse-button", "children"),
+    ],  # text displayed on button
+    [Input("data-geolocation-collapse-button", "n_clicks")],
+    [
+        State("data-geolocation-collapse-code", "is_open"),
+        State("data-geolocation-collapse-button", "children"),
+    ],
+)
+def toggle_pdf_retrieval_collapse(n_clicks, is_open, button_text):
+    return update_code_button(n_clicks, is_open, button_text)
