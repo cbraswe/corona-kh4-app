@@ -28,7 +28,7 @@ layout = dbc.Container(
         html.Br(),
         html.H3("Step 2: Convert the PDFs to Images"),
         html.Br(),
-        html.P('The primary OCR technologies available in Python are keras-ocr and pytesseract. Pytesseract is the most popular library, and it uses Tesseract-OCR developed by Google. However, both of these libraries require the input to be an image instead of a PDF. Therefore, it is required to convert each PDF to a set of images (i.e., a PDF with 500 pages becomes 500 images). There are multiple options for this: GhostScript and pdf2images are both options I have used in the past; however, pdf2images has a threading option, manages the creation of the output folder, and handles numbering of page numbers to images. Therefore, it was chosen instead. The DPI may also be adjusted; however, a quick search showed PDF scans are typically around 2-300 DPI. If the PDF is not a scan, then it is probable the text may be extracted directly without the use of OCR.'),
+        html.P('The primary OCR technologies available in Python are keras-ocr, pytesseract, tesserocr, and several other Tesseract libraries. However, most of these libraries require the input to be an image instead of a PDF, although some can process in-memory images. Therefore, it is ideal to convert each PDF to a set of images (i.e., a PDF with 500 pages becomes 500 images). There are multiple options for this: GhostScript and pdf2images are both options I have used in the past; however, pdf2images has a threading option, manages the creation of the output folder, and handles numbering of page numbers to images. Therefore, it was chosen instead. The DPI may also be adjusted; however, a quick search showed PDF scans are typically around 2-300 DPI, and Tesseract works best with 300+ DPI. If the PDF is not a scan, then it is probable the text may be extracted directly without the use of OCR.'),
         dbc.Button("", id="data-pdf2image-collapse-button", n_clicks=0),
         dbc.Collapse(
             notebook_to_md("notebooks/2_convert_nro_pdfs_to_imgs.ipynb"),
@@ -39,7 +39,7 @@ layout = dbc.Container(
         html.Br(),
         html.H3("Step 3: Use an OCR tool on the Images"),
         html.Br(),
-        html.P('For this step, Pytesseract was used, which required installing Tesseract-OCR. There are minimal parameters available to an end-user to affect output; however, it is advisable to set the output parameter to a dict or other enriched format. Adjusting the output will transition to providing a dictionary with coordinates of the text, the text detected, and a confidence level for the text. For this project, the confidence level will likely provide exceptionally meaningful in determining text to discard.'),
+        html.P('For this step, Pytesseract was used, which required installing Tesseract-OCR. There are minimal parameters available to an end-user to affect output; however, it is advisable to set the output parameter to a dict or other enriched format. Adjusting the output will transition to providing a dictionary with coordinates of the text, the text detected, and a confidence level for the text. For this project, the confidence level will likely provide exceptionally meaningful in determining text to discard. Step needs rewritten with some image processing techniques (a low pass filter to remove noise.)'),
         dbc.Button("", id="data-imgs2json-collapse-button", n_clicks=0),
         dbc.Collapse(
             notebook_to_md("notebooks/3_convert_imgs_to_json_text.ipynb"),
