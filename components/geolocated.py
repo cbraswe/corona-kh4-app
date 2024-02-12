@@ -51,7 +51,7 @@ layout = dbc.Container(
                                 dl.TileLayer(
                                     url="https://api.maptiler.com/maps/openstreetmap/256/{z}/{x}/{y}.jpg?key="
                                     + f"{os.environ.get('MAP_TILER_KEY')}",
-                                    attribution="https://www.maptiler.com/copyright/'>MapTiler</a>",
+                                    attribution="&copy; <a href='https://www.maptiler.com/copyright/'>MapTiler</a>",
                                 ),
                                 checked=False,
                                 name="Open Street Maps",

@@ -11,3 +11,8 @@
 	background-clip: padding-box;
 	color: black;
   }
+
+  .notebook-embed{
+	margin-left: 75px;
+	margin-top: 20px;
+  }

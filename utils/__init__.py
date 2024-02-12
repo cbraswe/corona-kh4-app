@@ -1,7 +1,8 @@
 
+from dash.dcc import Markdown
 import logging
 from nbconvert.exporters.markdown import MarkdownExporter
-
+from nbconvert.preprocessors import RegexRemovePreprocessor
 
 def reverse_code_text(text):
     """This reverses the text of buttons intended to show/hide notebooks. If show notebook is the text, then it returns hide notebook.
@@ -25,9 +26,12 @@ def notebook_to_md(filename):
     :rtype: str
     """
     mk = MarkdownExporter()
-    mk.exclude_output = True
-    mk.exclude_markdown = True
-    return mk.from_filename(filename=filename)[0]
+    mk.exclude_output = True # remove output 
+    mk.exclude_markdown = True # remove notebook content -> this is intended to be provided in paragraphs before the code
+    regx = RegexRemovePreprocessor()
+    regx.patterns = ["[\S]*\Z"] # HIDE EMPTY CELLS
+    mk.register_preprocessor(regx, enabled=True) #THE DEFAULT IS FALSE.
+    return Markdown(mk.from_filename(filename=filename)[0])
 
 def create_fh_logger(file):
     logger = logging.getLogger()
@@ -38,3 +42,8 @@ def create_fh_logger(file):
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
     return logger
+
+def update_code_button(n_clicks, is_open, button_text):
+    if n_clicks:
+        return not is_open, reverse_code_text(button_text)
+    return is_open, reverse_code_text(button_text)
