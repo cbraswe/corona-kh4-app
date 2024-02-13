@@ -16,11 +16,11 @@ layout = dbc.Container(
         html.P(children=[
             "To retrieve the data, the table containing a list of documents must be obtained from ",
             html.A("the NRO CAL Library Listing.", href='https://www.nro.gov/foia-home/foia-declassified-major-nro-programs-and-projects/CAL-Library-Listing/'),
-            " Following the request for the page's content, it is required to parse the return and identify all links to a document. Once all links are identified, a request must be submitted for each document. Lastly, the documents must be stored and saved locally to prevent constant re-downloading of data. The documents are slightly renamed during this process, namely the name starts with an ISO 8601 formatted date. This will allow Windows file systems to chronologically sort"
+            " Following the request for the page's content, it is required to parse the return and identify all links to a document. Once all links are identified, a request must be submitted for each document. Lastly, the documents must be stored and saved locally to prevent constant re-downloading of data. The documents are slightly renamed during this process, namely the name starts with an ISO 8601 formatted date. This will allow Windows file systems to chronologically sort when sorting by name. The below code uses asyncio, which reduced runtime from ~10mins to ~40secs compared to requests."
         ]),
         dbc.Button("", id="data-retrieval-collapse-button", n_clicks=0),
         dbc.Collapse(
-            notebook_to_md("notebooks/nro/1_fetch_nro.ipynb"),
+            notebook_to_md("notebooks/nro/1_fetch_nro.py"),
             id="data-retrieval-collapse-code",
             className='notebook-embed',
         ),

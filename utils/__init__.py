@@ -25,13 +25,18 @@ def notebook_to_md(filename):
     :return: Markdown that can be directly provided to dash.dcc.Markdown
     :rtype: str
     """
-    mk = MarkdownExporter()
-    mk.exclude_output = True # remove output 
-    mk.exclude_markdown = True # remove notebook content -> this is intended to be provided in paragraphs before the code
-    regx = RegexRemovePreprocessor()
-    regx.patterns = ["[\S]*\Z"] # HIDE EMPTY CELLS
-    mk.register_preprocessor(regx, enabled=True) #THE DEFAULT IS FALSE.
-    return Markdown(mk.from_filename(filename=filename)[0])
+    if filename[-2:] == 'py':
+        with open(filename, 'r') as f:
+            data = f.read()
+        return Markdown(f"```python\n{data}```\n")
+    else:
+        mk = MarkdownExporter()
+        mk.exclude_output = True # remove output 
+        mk.exclude_markdown = True # remove notebook content -> this is intended to be provided in paragraphs before the code
+        regx = RegexRemovePreprocessor()
+        regx.patterns = ["[\S]*\Z"] # HIDE EMPTY CELLS
+        mk.register_preprocessor(regx, enabled=True) #THE DEFAULT IS FALSE.
+        return Markdown(mk.from_filename(filename=filename)[0])
 
 def create_fh_logger(file):
     logger = logging.getLogger()

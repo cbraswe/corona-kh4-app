@@ -1,11 +1,11 @@
-.offset:before { /*This prevents html Anchor tags from linking into the Navbar */
+.offset:before { /*prevent html Anchor tags from rolling into the Navbar */
 	display: block; 
  	content: " "; 
-  	height: 70px;      /* Give height of your fixed element */
-        margin-top: -70px; /* Give negative margin of your fixed element */  	
-        visibility: hidden; 
+  	height: 70px;      /* height of navbar */
+    margin-top: -70px; /*  negative margin of the navgar */  	
+    visibility: hidden; 
 }
-/* change the default distance measure to black text*/
+/* change the default distance measure to black text - it's grey on white */
 .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
 	border: 2px solid rgba(0,0,0,0.2);
 	background-clip: padding-box;
