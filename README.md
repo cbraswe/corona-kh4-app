@@ -12,3 +12,8 @@ Instead of `gunicorn`, it is possible to use `waitress`. The command to invoke `
 
 ## Removing Notebook Output from Uploads
 ```git config filter.strip-notebook-output.clean 'jupyter nbconvert --ClearOutputPreprocessor.enabled=True --to=notebook --stdin --stdout --log-level=ERROR' ```
+
+## Pre-Commits
+`pip install pre-commit`
+`pre-commit install`
+`pre-commit autoupdate`
