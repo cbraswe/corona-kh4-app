@@ -1,6 +1,4 @@
 name: Deploys if Version
-description: Triggers a Render deployment on push/pull if tagged with version
-
 on:
   push:
     tags:
