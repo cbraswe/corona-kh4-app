@@ -3,6 +3,7 @@ name = "corona-kh4-app"
 version = "0.0.1"
 description = "An application to deploy an application focused on analyzing Corona KH-4 Analysis for a mountain range in East Tennessee."
 authors = ['cbraswe cbraswe <cbraswe@gmu.edu>']
+packages = [{include = "*", from="src"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0" 
