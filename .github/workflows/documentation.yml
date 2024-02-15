@@ -13,4 +13,4 @@ jobs:
           python-version: 3.x
       - run: pip install poetry
       - run: poetry install --all-extras
-      - run: poetry run mkdocs gh-deploy --clean --verbose
+      - run: poetry run mkdocs gh-deploy --force --clean --verbose
