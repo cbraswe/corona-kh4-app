@@ -53,7 +53,7 @@ layout = dbc.Container(
         ),
         dbc.Button("", id="data-imgs2json-collapse-button", n_clicks=0),
         dbc.Collapse(
-            file_to_md("notebooks/nro/3_convert_imgs_to_json_text.ipynb"),
+            file_to_md("notebooks/nro/4a_pytesseract.ipynb"),
             id="data-imgs2json-collapse-code",
             className="notebook-embed",
         ),

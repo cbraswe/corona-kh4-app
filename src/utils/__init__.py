@@ -58,6 +58,6 @@ def update_code_button(n_clicks: int, is_open: bool) -> Tuple[bool, str]:
     Returns:
         Tuple[bool, str]: A new value to provide is_open for a Collapse, a new value to provide to the Button text
     """
-    open = not is_open if n_clicks else is_open
-    text = "Hide Notebook" if open else "Show Notebook"
-    return open, text
+    is_open = not is_open if n_clicks else is_open
+    text = "Hide Notebook" if is_open else "Show Notebook"
+    return is_open, text
