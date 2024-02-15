@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 from dash import callback, Input, Output, State
 import os
 import rasterio
-from utils import notebook_to_md, update_code_button
+from utils import file_to_md, update_code_button
 
 name = "Geolocated Plane Crashes"
 # DC3 Notes: 18.75 nm from tri-cities airport
@@ -45,7 +45,7 @@ layout = dbc.Container(
         ),
         dbc.Button("", id="data-geolocation-collapse-button", n_clicks=0),
         dbc.Collapse(
-            notebook_to_md("notebooks/geolocation/1_geolocating_dc3.ipynb"),
+            file_to_md("notebooks/geolocation/1_geolocating_dc3.ipynb"),
             id="data-geolocation-collapse-code",
             className="notebook-embed",
         ),
@@ -160,8 +160,7 @@ layout = dbc.Container(
     [Input("data-geolocation-collapse-button", "n_clicks")],
     [
         State("data-geolocation-collapse-code", "is_open"),
-        State("data-geolocation-collapse-button", "children"),
     ],
 )
-def toggle_pdf_retrieval_collapse(n_clicks, is_open, button_text):
-    return update_code_button(n_clicks, is_open, button_text)
+def toggle_pdf_retrieval_collapse(n_clicks, is_open):
+    return update_code_button(n_clicks, is_open)

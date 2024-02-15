@@ -2,32 +2,21 @@ from dash.dcc import Markdown
 import logging
 from nbconvert.exporters.markdown import MarkdownExporter
 from nbconvert.preprocessors import RegexRemovePreprocessor
+from pathlib import Path
+from typing import Tuple, Union
 
 
-def reverse_code_text(text):
-    """This reverses the text of buttons intended to show/hide notebooks. If show notebook is the text, then it returns hide notebook.
+def file_to_md(file: Union[Path, str]) -> Markdown:
+    """Helper function to convert a .py or .ipynb file into Markdown, compatible with Dash. Empty cells, output, and markdown are removed from `.ipynb` files.
 
-    :param text: The current text associated with the button
-    :type text: str
-    :return: The new text associated with the button
-    :rtype: str
+    Args:
+        file (Union[Path, str]): The `.py` or `.ipynb` file
+
+    Returns:
+        Markdown: Markdown displaying the contents of the file
     """
-    if text == "" or text == "Hide Notebook":
-        return "Show Notebook"
-    else:
-        return "Hide Notebook"
-
-
-def notebook_to_md(filename):
-    """This uses nbconvert, which requires Jupyter (tough dependency), to convert an `ipynb` file to a `markdown` file. This can be used in sections to include embed code directly.
-
-    :param filename: The filename of the notebook to convert
-    :type filename: str
-    :return: Markdown that can be directly provided to dash.dcc.Markdown
-    :rtype: str
-    """
-    if filename[-2:] == "py":
-        with open(filename, "r") as f:
+    if str(file[-2:]) == "py":
+        with open(file, "r") as f:
             data = f.read()
         return Markdown(f"```python\n{data}```\n")
     else:
@@ -37,10 +26,18 @@ def notebook_to_md(filename):
         regx = RegexRemovePreprocessor()
         regx.patterns = ["[\S]*\Z"]  # HIDE EMPTY CELLS
         mk.register_preprocessor(regx, enabled=True)  # THE DEFAULT IS FALSE.
-        return Markdown(mk.from_filename(filename=filename)[0])
+        return Markdown(mk.from_filename(filename=file)[0])
 
 
-def create_fh_logger(file):
+def create_fh_logger(file: Union[Path, str]) -> logging.Logger:
+    """Creates a standardized file handling logger, primarily for use within the notebooks for long-running analytics. It saves the log to the specified file.
+
+    Args:
+        file (Union[Path, str]): The location to save logs
+
+    Returns:
+        logging.Logger: A configured logger ready for use
+    """
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
     formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(message)s")
@@ -51,7 +48,16 @@ def create_fh_logger(file):
     return logger
 
 
-def update_code_button(n_clicks, is_open, button_text):
-    if n_clicks:
-        return not is_open, reverse_code_text(button_text)
-    return is_open, reverse_code_text(button_text)
+def update_code_button(n_clicks: int, is_open: bool) -> Tuple[bool, str]:
+    """This function reverses the button text and state of a collapsed Notebook. If it's closed with
+
+    Args:
+        n_clicks (int): Current value of n_clicks associated with a Button
+        is_open (bool): Current value of is_open associated with a Collapse
+
+    Returns:
+        Tuple[bool, str]: A new value to provide is_open for a Collapse, a new value to provide to the Button text
+    """
+    open = not is_open if n_clicks else is_open
+    text = "Hide Notebook" if open else "Show Notebook"
+    return open, text

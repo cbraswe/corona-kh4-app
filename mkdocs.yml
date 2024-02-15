@@ -1,0 +1,16 @@
+site_name: CORONA KH-4 Interactive Application Docs
+repo_url: "https://github.com/cbraswe/corona-kh4-app"
+
+theme:
+  name: "material"
+
+plugins:
+- search
+- gen-files:
+    scripts:
+    - docs/gen_references.py
+- section-index
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [src]  # search packages in the src folder

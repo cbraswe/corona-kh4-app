@@ -1,6 +1,6 @@
 from dash import callback, html, Input, Output, State
 import dash_bootstrap_components as dbc
-from utils import notebook_to_md, update_code_button
+from utils import file_to_md, update_code_button
 
 name = "Analyzing NRO data"
 
@@ -27,7 +27,7 @@ layout = dbc.Container(
         ),
         dbc.Button("", id="data-retrieval-collapse-button", n_clicks=0),
         dbc.Collapse(
-            notebook_to_md("notebooks/nro/1_fetch_nro.py"),
+            file_to_md("notebooks/nro/1_fetch_nro.py"),
             id="data-retrieval-collapse-code",
             className="notebook-embed",
         ),
@@ -40,7 +40,7 @@ layout = dbc.Container(
         ),
         dbc.Button("", id="data-pdf2image-collapse-button", n_clicks=0),
         dbc.Collapse(
-            notebook_to_md("notebooks/nro/2_convert_nro_pdfs_to_imgs.ipynb"),
+            file_to_md("notebooks/nro/2_convert_nro_pdfs_to_imgs.ipynb"),
             id="data-pdf2image-collapse-code",
             className="notebook-embed",
         ),
@@ -53,7 +53,7 @@ layout = dbc.Container(
         ),
         dbc.Button("", id="data-imgs2json-collapse-button", n_clicks=0),
         dbc.Collapse(
-            notebook_to_md("notebooks/nro/3_convert_imgs_to_json_text.ipynb"),
+            file_to_md("notebooks/nro/3_convert_imgs_to_json_text.ipynb"),
             id="data-imgs2json-collapse-code",
             className="notebook-embed",
         ),
@@ -74,11 +74,10 @@ layout = dbc.Container(
     [Input("data-retrieval-collapse-button", "n_clicks")],
     [
         State("data-retrieval-collapse-code", "is_open"),
-        State("data-retrieval-collapse-button", "children"),
     ],
 )
-def toggle_pdf_retrieval_collapse0(n_clicks, is_open, button_text):
-    return update_code_button(n_clicks, is_open, button_text)
+def toggle_pdf_retrieval_collapse0(n_clicks, is_open):
+    return update_code_button(n_clicks, is_open)
 
 
 @callback(
@@ -87,13 +86,10 @@ def toggle_pdf_retrieval_collapse0(n_clicks, is_open, button_text):
         Output("data-pdf2image-collapse-button", "children"),
     ],  # text displayed on button
     [Input("data-pdf2image-collapse-button", "n_clicks")],
-    [
-        State("data-pdf2image-collapse-code", "is_open"),
-        State("data-pdf2image-collapse-button", "children"),
-    ],
+    [State("data-pdf2image-collapse-code", "is_open")],
 )
-def toggle_pdf_retrieval_collapse1(n_clicks, is_open, button_text):
-    return update_code_button(n_clicks, is_open, button_text)
+def toggle_pdf_retrieval_collapse1(n_clicks, is_open):
+    return update_code_button(n_clicks, is_open)
 
 
 @callback(
@@ -102,10 +98,7 @@ def toggle_pdf_retrieval_collapse1(n_clicks, is_open, button_text):
         Output("data-imgs2json-collapse-button", "children"),
     ],  # text displayed on button
     [Input("data-imgs2json-collapse-button", "n_clicks")],
-    [
-        State("data-imgs2json-collapse-code", "is_open"),
-        State("data-imgs2json-collapse-button", "children"),
-    ],
+    [State("data-imgs2json-collapse-code", "is_open")],
 )
-def toggle_pdf_retrieval_collapse2(n_clicks, is_open, button_text):
-    return update_code_button(n_clicks, is_open, button_text)
+def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
+    return update_code_button(n_clicks, is_open)
