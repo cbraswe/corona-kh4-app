@@ -123,37 +123,42 @@ navy_snb = dbc.AccordionItem(
 rf4_crash = dbc.AccordionItem(
     html.P(
         children=[
-            'On October 1, 1971 at approximately 16:02 EDT, An Airforce RF-4C crashed into Holston Mountain approximately 1.5miles East of Holston VOR. A FOIA request was submitted, but the documents were provided via hardcopy and have not been scanned. The RF-4 site is a popular geocaching site, and the coordinates for this crash are well known.'
+            "On October 1, 1971 at approximately 16:02 EDT, An Airforce RF-4C crashed into Holston Mountain approximately 1.5miles East of Holston VOR. A FOIA request was submitted, but the documents were provided via hardcopy and have not been scanned. The RF-4 site is a popular geocaching site, and the coordinates for this crash are well known."
         ]
     ),
-    title = 'Oct 1, 1971 RF-4C (SN 66-0460)',
-    id = datetime(1976,10,1).date().isoformat()
+    title="Oct 1, 1971 RF-4C (SN 66-0460)",
+    id=datetime(1976, 10, 1).date().isoformat(),
 )
 
 piper_pa34 = dbc.AccordionItem(
     html.P(
         children=[
             "On April 7, 1994 at 08:10 EDT, a Piper PA-31350 crashed 200ft below the ",
-             html.A("crest of Holston Mountain at about 4,000ft MSL.", href="https://app.ntsb.gov/pdfgenerator/ReportGeneratorFile.ashx?EventID=20001206X01022&AKey=1&RType=HTML&IType=FA"),
-            "The location was approximately 5mi NE of the Elizaebthon Airport, but a specific location was not listed."
+            html.A(
+                "crest of Holston Mountain at about 4,000ft MSL.",
+                href="https://app.ntsb.gov/pdfgenerator/ReportGeneratorFile.ashx?EventID=20001206X01022&AKey=1&RType=HTML&IType=FA",
+            ),
+            "The location was approximately 5mi NE of the Elizaebthon Airport, but a specific location was not listed.",
         ]
     ),
-    title = 'Apr 7, 1994 Piper PA-31350 (SN 31-7852127)',
-    id = datetime(1994,4,8).date().isoformat()
+    title="Apr 7, 1994 Piper PA-31350 (SN 31-7852127)",
+    id=datetime(1994, 4, 8).date().isoformat(),
 )
 
 cessna_172k_2014 = dbc.AccordionItem(
     html.P(
         children=[
             "On March 18, 2014 at 19:15 EST, a Cessna 172K crashed ",
-             html.A("at approximately 36.433334, -82.160003.", href="https://data.ntsb.gov/Docket?ProjectID=88934"),
-            "The plane came to rest at approximately 3000ft MSL."
+            html.A(
+                "at approximately 36.433334, -82.160003.",
+                href="https://data.ntsb.gov/Docket?ProjectID=88934",
+            ),
+            "The plane came to rest at approximately 3000ft MSL.",
         ]
     ),
-    title = 'Mar 18, 2014 Cessna 172K (SN 17257379)',
-    id = datetime(2014,3,18).date().isoformat()
+    title="Mar 18, 2014 Cessna 172K (SN 17257379)",
+    id=datetime(2014, 3, 18).date().isoformat(),
 )
-
 
 
 layout = dbc.Container(
@@ -171,7 +176,16 @@ layout = dbc.Container(
         ),
         dbc.Accordion(
             sorted(
-                [army_l20_1960, army_l19_1961, dc3_1959, cessna_182, navy_snb, rf4_crash, piper_pa34, cessna_172k_2014],
+                [
+                    army_l20_1960,
+                    army_l19_1961,
+                    dc3_1959,
+                    cessna_182,
+                    navy_snb,
+                    rf4_crash,
+                    piper_pa34,
+                    cessna_172k_2014,
+                ],
                 key=lambda x: x.id,
             ),
             start_collapsed=True,

@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "corona-kh4-app"
+version = "0.0.1"
+description = "An application to deploy an application focused on analyzing Corona KH-4 Analysis for a mountain range in East Tennessee."
+authors = ['cbraswe cbraswe <cbraswe@gmu.edu>']
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0" 
+dash = "==2.15.0"
+dash-bootstrap-components = "==1.5.0"
+dash_leaflet = "==1.0.15"
+gunicorn = "==21.1.0"
+jupyter = "==1.0.0"
+nbconvert = "==7.16.0"
+pybtex = "==0.24.0"
+pybtex-apa7-style = "==0.1.3"
+rasterio = "==1.3.9"
+shapely = "==2.0.2"
+
+[tool.poetry.dev-dependencies]
+ruff = ">=0.2.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
