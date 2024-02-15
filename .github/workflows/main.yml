@@ -1,0 +1,21 @@
+name: Deploys if Version
+description: Triggers a Render deployment on push/pull if tagged with version
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  pull_request:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy application to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.CORONA_RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.CORONA_RENDER_API_KEY }}
+          wait-for-success: true
