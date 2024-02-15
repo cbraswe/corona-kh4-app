@@ -45,8 +45,8 @@ sidebar = html.Div(
     ],
     style={
         "position": "fixed",
-        "width": "16rem",
-        "margin": "10rem -15rem",
+        "width": "14rem",
+        "margin": "10rem 0rem",
         "padding": "1rem",
         "border": "2px solid #2D4A63",
         "border-radius": "20px",
@@ -58,7 +58,7 @@ layout = dbc.Container(
         sidebar,
         html.Div(
             children=[component.layout for component in component_order],
-            style={"margin-left": "2rem"},
+            style={"margin-left": "16rem"},
         ),
     ],
 )
