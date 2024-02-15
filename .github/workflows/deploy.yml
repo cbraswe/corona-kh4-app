@@ -1,4 +1,4 @@
-name: Deploys if Version
+name: Deploy
 on:
   push:
     tags:
