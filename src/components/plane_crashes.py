@@ -18,8 +18,9 @@ army_l20_1960 = dbc.AccordionItem(
                     " A FOIA request was submitted to the Army and may be independently ",
                     html.A(
                         "downloaded and reviewed.",
-                        href="/data/1960_army_l20_foia.pdf",
+                        href="/static/1960_army_l20_foia.pdf",
                         download="1960_army_l20_foia.pdf",
+                        target="_blank"
                     ),
                     " Within the report, there are topographic scans of the area, several pictures taken from the perspective of the crash site, and detailed radio traffic surrounding the incident.",
                 ]
@@ -54,7 +55,8 @@ army_l19_1961 = dbc.AccordionItem(
             "On April 5, 1961 at approximately 19:09 EST, an Army L-19D crashed into an unspecified area of Holston Mountain approximately 3600' MSL. ",
             html.A(
                 "The statement issued on page 19 of the FOIA request ",
-                href="/data/1961_army_l19d_foia.pdf",
+                href="/static/1961_army_l19_foia.pdf",
+                target="_blank"
             ),
             "states, ",
             html.Em(
