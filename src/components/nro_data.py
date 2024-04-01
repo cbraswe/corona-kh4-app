@@ -163,7 +163,7 @@ def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
     [Input("data-imgs2json-collapse-button", "n_clicks")],
     [State("data-imgs2json-collapse-code", "is_open")],
 )
-def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
+def toggle_pdf_retrieval_collapse3(n_clicks, is_open):
     return update_code_button(n_clicks, is_open)
 
 @callback(
@@ -174,7 +174,7 @@ def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
     [Input("data-analyzeocr-collapse-button", "n_clicks")],
     [State("data-analyzeocr-collapse-code", "is_open")],
 )
-def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
+def toggle_pdf_retrieval_collapse4(n_clicks, is_open):
     return update_code_button(n_clicks, is_open)
 
 @callback(
@@ -185,7 +185,7 @@ def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
     [Input("data-tokenize-collapse-button", "n_clicks")],
     [State("data-tokenize-collapse-code", "is_open")],
 )
-def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
+def toggle_pdf_retrieval_collapse5(n_clicks, is_open):
     return update_code_button(n_clicks, is_open)
 
 @callback(
@@ -196,5 +196,5 @@ def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
     [Input("data-topic-collapse-button", "n_clicks")],
     [State("data-topic-collapse-code", "is_open")],
 )
-def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
+def toggle_pdf_retrieval_collapse6(n_clicks, is_open):
     return update_code_button(n_clicks, is_open)
