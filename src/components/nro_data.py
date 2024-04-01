@@ -49,12 +49,64 @@ layout = dbc.Container(
         html.H3("Step 3: Pre-Process the Images"),
         html.Br(),
         html.P(
+            "This step is under construction. It was added after poorly performing OCR translations."
+        ),
+        dbc.Button("", id="data-clean_imgs-collapse-button", n_clicks=0),
+        dbc.Collapse(
+            file_to_md("notebooks/nro/3_clean_imgs.ipynb"),
+            id="data-clean_imgs-collapse-code",
+            className="notebook-embed",
+        ),
+        html.Br(),
+        html.Br(),
+        html.H3("Step 4: Use Tesseract"),
+        html.Br(),
+        html.P(
             "For this step, Pytesseract was used, which required installing Tesseract-OCR. There are minimal parameters available to an end-user to affect output; however, it is advisable to set the output parameter to a dict or other enriched format. Adjusting the output will transition to providing a dictionary with coordinates of the text, the text detected, and a confidence level for the text. For this project, the confidence level will likely provide exceptionally meaningful in determining text to discard. Step needs rewritten with some image processing techniques (a low pass filter to remove noise.)"
         ),
         dbc.Button("", id="data-imgs2json-collapse-button", n_clicks=0),
         dbc.Collapse(
             file_to_md("notebooks/nro/4a_pytesseract.ipynb"),
             id="data-imgs2json-collapse-code",
+            className="notebook-embed",
+        ),
+        html.Br(),
+        html.Br(),
+        html.H3("Step 4B: Analyze the Output"),
+        html.Br(),
+        html.P(
+            "For this step, Pytesseract was used, which required installing Tesseract-OCR. There are minimal parameters available to an end-user to affect output; however, it is advisable to set the output parameter to a dict or other enriched format. Adjusting the output will transition to providing a dictionary with coordinates of the text, the text detected, and a confidence level for the text. For this project, the confidence level will likely provide exceptionally meaningful in determining text to discard. Step needs rewritten with some image processing techniques (a low pass filter to remove noise.)"
+        ),
+        dbc.Button("", id="data-analyzeocr-collapse-button", n_clicks=0),
+        dbc.Collapse(
+            file_to_md("notebooks/nro/analyze_ocr_text.ipynb"),
+            id="data-analyzeocr-collapse-code",
+            className="notebook-embed",
+        ),
+        html.Br(),
+        html.Br(),
+        html.H3("Step 5: Clean and Tokenized the Text"),
+        html.Br(),
+        html.P(
+            "This step applies a Snowball stemmer to the text. Prior to this, certain text conditions are removed. The most peculiar text condition within these documents are repeating characters (i.e., ee) forming a word."
+        ),
+        dbc.Button("", id="data-tokenize-collapse-button", n_clicks=0),
+        dbc.Collapse(
+            file_to_md("notebooks/nro/clean_tokenize_ocr.ipynb"),
+            id="data-tokenize-collapse-code",
+            className="notebook-embed",
+        ),
+        html.Br(),
+        html.Br(),
+        html.H3("Step 6: Create a Topic Model"),
+        html.Br(),
+        html.P(
+            "This is an LDA model."
+        ),
+        dbc.Button("", id="data-topic-collapse-button", n_clicks=0),
+        dbc.Collapse(
+            file_to_md("notebooks/nro/create_topic_model.ipynb"),
+            id="data-topic-collapse-code",
             className="notebook-embed",
         ),
         html.Br(),
@@ -94,11 +146,55 @@ def toggle_pdf_retrieval_collapse1(n_clicks, is_open):
 
 @callback(
     [
+        Output("data-clean_imgs-collapse-code", "is_open"),
+        Output("data-clean_imgs-collapse-button", "children"),
+    ],  # text displayed on button
+    [Input("data-clean_imgs-collapse-button", "n_clicks")],
+    [State("data-clean_imgs-collapse-code", "is_open")],
+)
+def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
+    return update_code_button(n_clicks, is_open)
+
+@callback(
+    [
         Output("data-imgs2json-collapse-code", "is_open"),
         Output("data-imgs2json-collapse-button", "children"),
     ],  # text displayed on button
     [Input("data-imgs2json-collapse-button", "n_clicks")],
     [State("data-imgs2json-collapse-code", "is_open")],
+)
+def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
+    return update_code_button(n_clicks, is_open)
+
+@callback(
+    [
+        Output("data-analyzeocr-collapse-code", "is_open"),
+        Output("data-analyzeocr-collapse-button", "children"),
+    ],  # text displayed on button
+    [Input("data-analyzeocr-collapse-button", "n_clicks")],
+    [State("data-analyzeocr-collapse-code", "is_open")],
+)
+def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
+    return update_code_button(n_clicks, is_open)
+
+@callback(
+    [
+        Output("data-tokenize-collapse-code", "is_open"),
+        Output("data-tokenize-collapse-button", "children"),
+    ],  # text displayed on button
+    [Input("data-tokenize-collapse-button", "n_clicks")],
+    [State("data-tokenize-collapse-code", "is_open")],
+)
+def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
+    return update_code_button(n_clicks, is_open)
+
+@callback(
+    [
+        Output("data-topic-collapse-code", "is_open"),
+        Output("data-topic-collapse-button", "children"),
+    ],  # text displayed on button
+    [Input("data-topic-collapse-button", "n_clicks")],
+    [State("data-topic-collapse-code", "is_open")],
 )
 def toggle_pdf_retrieval_collapse2(n_clicks, is_open):
     return update_code_button(n_clicks, is_open)
