@@ -79,7 +79,7 @@ layout = dbc.Container(
         ),
         dbc.Button("", id="data-analyzeocr-collapse-button", n_clicks=0),
         dbc.Collapse(
-            file_to_md("notebooks/nro/analyze_ocr_text.ipynb"),
+            file_to_md("notebooks/nro/analyze_output_ocr_text.ipynb"),
             id="data-analyzeocr-collapse-code",
             className="notebook-embed",
         ),
