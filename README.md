@@ -11,4 +11,7 @@ Please open an [issue and provide as much context as possible](https://github.co
 - Notebook output is filteerd by establishing a `config` for git: `git config filter.strip-notebook-output.clean 'jupyter nbconvert --ClearOutputPreprocessor.enabled=True --to=notebook --stdin --stdout --log-level=ERROR`
 - Windows users can use `gunicorn app:server` from WSL to start the application or install `waitress` and use `waitress-serve --listen=127.0.0.1:8050 app:server`.
 - `dev_app.py` uses `watchdog` to monitor changes, and it will automatically restart the application when changes are detected.
+- If using VSCode, docstrings can be created using autoDocstring and the Google format.
 
+## Documentation
+Documentation is built using mkdocs, using the Materiel theme. They are deployed using Github pages and are [accessible here.](https://cbraswe.github.io/corona-kh4-app/Code/utils/). Currently, only `utils` has noteworthy documentation.
