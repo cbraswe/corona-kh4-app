@@ -21,8 +21,6 @@ component_order = [
     plane_crashes,
     geolocated,
     nro_data,
-    corona_dsm,
-    keypoint_fm,
     references,
 ]
 

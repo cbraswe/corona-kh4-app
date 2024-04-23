@@ -21,8 +21,8 @@ def file_to_md(file: Union[Path, str]) -> Markdown:
         return Markdown(f"```python\n{data}```\n")
     else:
         mk = MarkdownExporter()
-        mk.exclude_output = True  # remove output
-        mk.exclude_markdown = True  # remove notebook content -> this is intended to be provided in paragraphs before the code
+        mk.exclude_output = False  # remove output
+        mk.exclude_markdown = False  # remove notebook content -> this is intended to be provided in paragraphs before the code
         regx = RegexRemovePreprocessor()
         regx.patterns = ["[\S]*\Z"]  # HIDE EMPTY CELLS
         mk.register_preprocessor(regx, enabled=True)  # THE DEFAULT IS FALSE.

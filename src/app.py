@@ -23,25 +23,6 @@ app.layout = dbc.Container(
                         )
                     ),
                     dbc.Col(
-                        dbc.Nav(
-                            children=[
-                                dbc.NavLink(
-                                    page["name"],
-                                    href=page["path"],
-                                    style={
-                                        "border-left": "2px solid white",
-                                        "margin-right": "2px",
-                                    },
-                                )
-                                for page in dash.page_registry.values()
-                                if page["path"] != "/not-found-404"
-                                and page["path"] != "/"
-                            ],
-                            style={"justify-content": "end"},
-                            className="ml-auto",  # css flexbox margin left: auto to right align content
-                        ),
-                    ),
-                    dbc.Col(
                         html.A(
                             html.Img(
                                 src="/assets/github_white.png",

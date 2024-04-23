@@ -43,7 +43,7 @@ layout = dbc.Container(
         html.Br(),
         html.P(
             children=[
-                "Newspapers will be used to identify approximate location of crashes, which will also restrict the analyzed CORONA imagery. Notionally, the next steps will be to use a feature matching model between CORONA and some other source. Since the area is mostly mountainous, it may be possible to create features from the general topography for use in feature matching to modern processes. Otherwise, the feature matching will use a modern deep learning framework to compare CORONA imagery to semi-recently collected imagery (either satellite or aerial). The accuracy will be determined by a manual process, which will involve creating a transformation matrix for a subset of images. The accuracy will be calculated based on the pixel shift between the results from feature matching and the manual process."
+                "Newspapers will be used to identify approximate location of crashes, which will also restrict the analyzed CORONA imagery. Notionally, the next steps will be to use a feature matching model between CORONA and some other source. "
             ]
         ),
     ],
